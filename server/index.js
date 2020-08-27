@@ -81,9 +81,7 @@ app.post("/api/users/login", (req, res) => {
         if (err) return res.status(400).send(err);
 
         // 토큰을 저장한다. 어디에? 쿠키 or 로컬스토리지/ 쿠키에 저장
-        res.cookie("x_auth", user.token)
-        .status(200)
-        .json({
+        res.cookie("x_auth", user.token).status(200).json({
           loginSuccess: true,
           userId: user._id,
         });
@@ -118,6 +116,10 @@ app.get("/api/users/logout", auth, (req, res) => {
       success: true,
     });
   });
+});
+
+app.get("/api/hello", (req, res) => {
+  res.send("안녕하세요~");
 });
 
 app.listen(port, () => {
